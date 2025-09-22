@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L U T O</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">L U T O</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="login-btn" id="openModalBtn">Login</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-cooking-in-a-pan-close-up-8939-large.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="overlay">
+      <h1>Welcome to L U T O</h1>
+      <p>Gamified Cooking with AI</p>
+      <button class="cta-btn">Get Started</button>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>AI-Powered Recipes</h3>
+          <p>Get personalized recipe recommendations based on your ingredients and preferences.</p>
+        </div>
+        <div class="feature">
+          <h3>Gamified Experience</h3>
+          <p>Earn points, unlock achievements, and level up your cooking skills.</p>
+        </div>
+        <div class="feature">
+          <h3>Compete with Friends</h3>
+          <p>Challenge your friends and climb the leaderboards together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login / Signup Modal -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+
+      <!-- Tabs -->
+      <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'LoginForm')" id="loginTabBtn">Login</button>
+        <button class="tablinks" onclick="openTab(event, 'SignupForm')" id="signupTabBtn">Sign Up</button>
+      </div>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages" id="flashMessages">
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <!-- Login Form -->
+<div id="LoginForm" class="tabcontent" style="display: block;">
+    <h2>Login</h2>
+    <form action="{{ url_for('login') }}" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+
+      <!-- Signup Form -->
+      <div id="SignupForm" class="tabcontent" style="display: none;">
+        <h2>Sign Up</h2>
+        <form action="{{ url_for('signup') }}" method="POST">
+          <input type="text" name="username" placeholder="Username" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS for modal & tabs -->
+  <script src="{{ url_for('static', filename='scripts/modal.js') }}"></script>
+  <script>
+    const modal = document.getElementById("authModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementsByClassName("close")[0];
+
+    // Open modal and default to Login tab
+    openModalBtn.onclick = () => {
+      modal.style.display = "block";
+      document.getElementById('LoginForm').style.display = 'block';
+      document.getElementById('SignupForm').style.display = 'none';
+      document.getElementById('loginTabBtn').classList.add('active');
+      document.getElementById('signupTabBtn').classList.remove('active');
+    };
+
+    // Close modal
+    closeBtn.onclick = () => modal.style.display = "none";
+
+    // Close if clicked outside modal
+    window.onclick = (event) => {
+      if (event.target === modal) modal.style.display = "none";
+    };
+
+    // Tab switching
+    function openTab(evt, tabName) {
+      const tabcontent = document.getElementsByClassName("tabcontent");
+      const tablinks = document.getElementsByClassName("tablinks");
+
+      for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+      for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Hide flash messages after 5 seconds
+    setTimeout(function() {
+      const flashMessages = document.getElementById('flashMessages');
+      if (flashMessages) {
+        flashMessages.style.display = 'none';
+      }
+    }, 5000);
+  </script>
+
+  <!-- Flash message CSS -->
+  <style>
+    .flash.success { background-color: #28a745; color: white; padding: 10px; margin: 5px 0; border-radius: 5px; }
+    .flash.error { background-color: #dc3545; color: white; padding: 10px; margin: 5px 0; border-radius: 5px; }
+    .flash-messages { margin-bottom: 10px; }
+  </style>
+</body>
+</html>

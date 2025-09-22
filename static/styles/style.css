@@ -1,0 +1,312 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font */
+body {
+  font-family: 'Fuzzy Bubbles', cursive;
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #222;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ff7b54;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+
+.nav-links a:hover {
+  color: #ff7b54;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-btn {
+  padding: 10px 25px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Fuzzy Bubbles', cursive;
+  font-weight: 700;
+}
+
+.login-btn:hover {
+  background: white;
+  color: #ff7b54;
+}
+
+/* Hero Section */
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 60px 40px;
+  border-radius: 15px;
+  max-width: 800px;
+  backdrop-filter: blur(5px);
+}
+
+.overlay h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.overlay p {
+  font-size: 1.8rem;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.cta-btn {
+  padding: 15px 40px;
+  background: #ff7b54;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Fuzzy Bubbles', cursive;
+  font-weight: 700;
+}
+
+.cta-btn:hover {
+  background: #ff9d6f;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Content Section */
+.content {
+  padding: 100px 50px;
+  background: #fff6e6;
+  color: #333;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content h2 {
+  font-size: 2.8rem;
+  margin-bottom: 60px;
+  color: #ff7b54;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #ff7b54;
+}
+
+.feature p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Modal background */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7); /* darker overlay */
+  transition: opacity 0.3s ease;
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #1e1e1e;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  color: white;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  animation: slideDown 0.3s ease;
+}
+
+/* Close button */
+.modal .close {
+  color: #fff;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal .close:hover {
+  color: #ff4d4d;
+}
+
+/* Tabs */
+.tab button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 8px 8px 0 0;
+  transition: 0.2s;
+}
+.tab button.active {
+  background-color: #ff7f50;
+}
+.tab button:hover {
+  background-color: #555;
+}
+
+/* Tab content */
+.tabcontent {
+  padding: 20px 0;
+}
+
+/* Forms */
+.modal form input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #333;
+  color: white;
+}
+.modal form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff7f50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.modal form button:hover {
+  background-color: #ff4d4d;
+}
+
+/* Animation */
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-links {
+    gap: 15px;
+  }
+  
+  .overlay {
+    padding: 40px 20px;
+  }
+  
+  .overlay h1 {
+    font-size: 2.5rem;
+  }
+  
+  .overlay p {
+    font-size: 1.4rem;
+  }
+  
+  .content {
+    padding: 80px 20px;
+  }
+  
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+}
