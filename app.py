@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import text
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -18,6 +19,13 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
+# Recipe model
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+
+
 # Create tables if they don't exist
 with app.app_context():
     db.create_all()
@@ -29,13 +37,18 @@ def login_page():
     return render_template('login.html')
 
 # Protected home route
+
 @app.route('/home')
 def home():
     if 'username' not in session:
         flash("Please log in to access this page.", "error")
         return redirect(url_for('login_page'))
 
-    return render_template('home.html', username=session['username'])
+    # Use text() for raw SQL
+    result = db.session.execute(text("SELECT name FROM Recipe")).fetchall()
+    recipes_list = [r[0] for r in result]
+
+    return render_template('home.html', username=session['username'], recipes=recipes_list)
 
 # Signup route
 @app.route('/signup', methods=['POST'])

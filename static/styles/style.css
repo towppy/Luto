@@ -105,8 +105,8 @@ body {
 }
 
 .overlay h1 {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 10px;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -115,6 +115,65 @@ body {
   font-size: 1.8rem;
   color: white;
   margin-bottom: 30px;
+}
+
+ /* Navbar Search Bar */
+.navbar-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto; /* push it to the right in navbar */
+}
+
+.navbar-search input {
+  width: 250px;
+  padding: 8px 12px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.navbar-search button {
+  padding: 8px 16px;
+  border-radius: 0 5px 5px 0;
+  border: none;
+  background-color: #ff6f61;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Navbar Recipes Dropdown */
+.navbar-recipes {
+  display: none; /* hidden by default */
+  flex-direction: column;
+  position: absolute;
+  top: 60px; /* adjust depending on navbar height */
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 1000;
+  min-width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.navbar-recipes .recipe-card {
+  color: white;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.navbar-recipes .recipe-card:last-child {
+  border-bottom: none;
+}
+
+.navbar-recipes .recipe-card:hover {
+  background-color: rgba(255, 111, 97, 0.7);
 }
 
 .cta-btn {
@@ -310,3 +369,4 @@ body {
     align-items: center;
   }
 }
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L U T O - Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'loading.html' %}
+
+  <!-- Navigation Bar with Search -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">L U T O</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Recipes</a></li>
+        <li><a href="#">Leaderboard</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+
+      <!-- Search bar inside navbar -->
+      <div class="navbar-search">
+        <input type="text" id="searchInput" placeholder="Search recipes...">
+        <button onclick="searchRecipes()">Search</button>
+      </div>
+    </nav>
+
+    <!-- Recipe results dropdown -->
+    <div id="navbarRecipes" class="navbar-recipes">
+      {% for recipe in recipes %}
+        <div class="recipe-card">{{ recipe }}</div>
+      {% endfor %}
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-cooking-in-a-pan-close-up-8939-large.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="overlay">
+      <h1 style="font-size:2rem;">Welcome, {{ session['username'] }}!</h1>
+      <p>Start cooking and level up your skills</p>
+      <a href="#features" class="cta-btn">Explore Features</a>
+    </div>
+  </section>
+
+
+
+  <!-- Additional Section -->
+  <section class="content">
+    <div class="container">
+      <h2>Featured Recipes</h2>
+      <div class="features">
+        {% for recipe in recipes %}
+          <div class="feature">
+            <h3>{{ recipe }}</h3>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    function searchRecipes() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('#navbarRecipes .recipe-card');
+
+      cards.forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(input) ? 'block' : 'none';
+      });
+    }
+
+    // Hide recipes dropdown when clicking outside
+    window.onclick = function(event) {
+      const container = document.getElementById('navbarRecipes');
+      const searchBar = document.querySelector('.navbar-search');
+      if (!searchBar.contains(event.target)) {
+        container.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
